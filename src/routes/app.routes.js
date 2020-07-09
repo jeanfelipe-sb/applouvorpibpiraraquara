@@ -7,6 +7,7 @@ import styles from '../styles/globalStyles'
 import Home from './../pages/Home'
 import Escalas from './../pages/Escalas'
 import Menu from './../pages/Menu'
+import Musicas from './../pages/Musicas'
 
 const Tab = createBottomTabNavigator();
 
@@ -55,7 +56,7 @@ function AppRoutes() {
         }}
       />
       <Tab.Screen name="Escalas" component={Escalas} />
-      <Tab.Screen name="Musicas" component={Escalas} />
+      <Tab.Screen name="Musicas" component={Musicas} />
       <Tab.Screen name="Menu" component={Menu} />
     </Tab.Navigator>
   );
