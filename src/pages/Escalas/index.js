@@ -88,6 +88,7 @@ export default function Escalas() {
     setRefreshing(true);
     await api.get(`/escalasmes/`+numberMonth+`-`+year)
     .then((response) => {
+      console.log(response.data.data)
       setEscalas(response.data.data);
       setRefreshing(false);
     });   
@@ -168,8 +169,9 @@ export default function Escalas() {
                 </CardBody>
               </CardBodyScroll>
                 <PanelCollapse title="Músicas">
-                  <ItemMusica title="Musica teste" artist="Artista Teste"/>
-                  <ItemMusica title="Musica teste" artist="Artista Teste"/>
+                  {escala.musicas.map((musica) =>
+                    <ItemMusica key={musica.id} title={musica.titulo} artist={musica.artista}/>
+                  )}
                 </PanelCollapse> 
             </Card>
           )}

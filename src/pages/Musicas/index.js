@@ -44,7 +44,7 @@ export default function Musicas() {
         <Body>
           {loading ? <TextHeader>Carregando</TextHeader> : <> 
             {musicas.map((musica) =>
-              <ItemBody>
+              <ItemBody key={musica.id}>
                 <ItemMusica title={musica.titulo} artist={musica.artista}/>
               </ItemBody>
             )}
