@@ -8,7 +8,8 @@ import {
   TextBody,
   CardRight,
   CardRightTouch,
-  TextBodyError
+  TextBodyError,
+  ArtistMusic,TitleMusic
 } from './styles'
 
 export default function ItemMusica(props) {
@@ -17,7 +18,8 @@ export default function ItemMusica(props) {
       <Card>
         <Icon name="music-tone-alt"/>
         <CardBody>
-          {props.children}
+          <TitleMusic numberOfLines={1}>{props.title}</TitleMusic>
+          <ArtistMusic numberOfLines={1}>{props.artist}</ArtistMusic>
         </CardBody>
         <CardRight>
           <Icon name="arrow-right"/>

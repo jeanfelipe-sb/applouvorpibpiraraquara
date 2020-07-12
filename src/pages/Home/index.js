@@ -10,11 +10,8 @@ export default function Home() {
   return (
     <Wrapper>
       <Container>
-        <HeaderHome>
-          
-        </HeaderHome>
+        <HeaderHome/>
         <UltimosAvisos/>
-        <CardProximaEscala/>
         <CardProximaEscala/>
       </Container>
     </Wrapper>

@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import AuthContext from '../../contexts/auth';
+import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 
 import ItemMusica from '../../components/ItemMusica/index';
@@ -7,18 +6,29 @@ import TouchButtonLight from '../../components/TouchButtonLight/index';
 import { 
   Container, 
   Header,
+  Body,
+  ItemBody,
   Wrapper, 
   TextHeader,
-  TitleMusic,
-  ArtistMusic,
   ContainerSearch,
-  InputSearch,  
-  ButtonSearch,
-  IconSearch 
+  InputSearch
 } from './styles'
 
-export default function Muscas() {
-  const { signOut } = useContext(AuthContext);
+export default function Musicas() {
+  const [musicas, setMusicas] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  async function loadData() {
+    await api.get(`/musicas`)
+    .then((response) => {
+      setMusicas(response.data.data)
+    });      
+    setLoading(false);
+  }
+  
+  useEffect(() => {
+    loadData();
+  },[]);
     
   return (   
     <Wrapper>
@@ -27,28 +37,19 @@ export default function Muscas() {
           <TextHeader>Músicas</TextHeader>
           <ContainerSearch>
             <InputSearch 
-              placeholder="Pesquisar"/>
-            <ButtonSearch>
-              <IconSearch name="magnifier"/>
-            </ButtonSearch>
+              placeholder="Pesquisar"
+              returnKeyType="search"/>
           </ContainerSearch>
         </Header>
-        <ItemMusica>
-          <TitleMusic numberOfLines={1}>Nome da música teste</TitleMusic>
-          <ArtistMusic numberOfLines={1}>Nome do artista</ArtistMusic>
-        </ItemMusica>
-        <ItemMusica>
-          <TitleMusic numberOfLines={1}>Nome da música</TitleMusic>
-          <ArtistMusic numberOfLines={1}>Nome do artista</ArtistMusic>
-        </ItemMusica>
-        <ItemMusica>
-          <TitleMusic numberOfLines={1}>Nome da música</TitleMusic>
-          <ArtistMusic numberOfLines={1}>Nome do artista</ArtistMusic>
-        </ItemMusica>
-        <ItemMusica>
-          <TitleMusic numberOfLines={1}>Nome da música</TitleMusic>
-          <ArtistMusic numberOfLines={1}>Nome do artista</ArtistMusic>
-        </ItemMusica>
+        <Body>
+          {loading ? <TextHeader>Carregando</TextHeader> : <> 
+            {musicas.map((musica) =>
+              <ItemBody>
+                <ItemMusica title={musica.titulo} artist={musica.artista}/>
+              </ItemBody>
+            )}
+          </>}
+        </Body>
         <TouchButtonLight>CARREGAR MAIS</TouchButtonLight>
       </Container>
     </Wrapper>

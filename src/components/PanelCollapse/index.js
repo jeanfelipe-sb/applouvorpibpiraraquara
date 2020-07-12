@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
-import {TouchableHighlight, Animated, UIManager, LayoutAnimation, Platform} from 'react-native';
-import { Content, Body, Title, ViewTitle} from './styles';
-import Icons from 'react-native-vector-icons/MaterialIcons';
+import {TouchableHighlight, UIManager, LayoutAnimation, Platform} from 'react-native';
+import { Content, Body, Title, ViewTitle, Icons} from './styles';
 
 class PanelCollapse extends Component {
   constructor(props){
     super(props);
 
     this.icons = {     //Step 2
-        'up'    : <Icons name="keyboard-arrow-up" size={20} style={{lineHeight: 15}} color="#D37C38" />,
-        'down'  : <Icons name="keyboard-arrow-down" size={20} style={{lineHeight: 15}} color="#D37C38" />               
+        'up'    : <Icons name="keyboard-arrow-up" style={{lineHeight: 15}} />,
+        'down'  : <Icons name="keyboard-arrow-down" style={{lineHeight: 15}} />               
     };
 
     this.state = {       //Step 3

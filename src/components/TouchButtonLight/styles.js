@@ -7,7 +7,7 @@ export const Button1Container = styled.TouchableOpacity `
   border-color: ${props => props.theme.colors.danger};
   padding: 10px;
   align-items: center;
-  margin: 17px;
+  margin: 0 15px 15px;
 `;
 
 export const Button1Text = styled.Text `

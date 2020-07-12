@@ -12,7 +12,6 @@ export const Card = styled.View `
   flex-direction: row;
   justify-content: space-between;
   border-radius: 7px; 
-  margin: 5px 15px ;
 `;
 
 export const CardBody = styled.View ``;
@@ -28,6 +27,17 @@ export const CardRight = styled.View `
 `;
 
 export const CardRightTouch = styled.TouchableOpacity``;
+
+export const TitleMusic = styled.Text`
+  font-size: 17px;
+  color: ${props => props.theme.colors.darker};
+`;
+
+export const ArtistMusic = styled.Text`
+  font-size: 14px;
+  color: ${props => props.theme.colors.dark};
+`;
+
 
 
 

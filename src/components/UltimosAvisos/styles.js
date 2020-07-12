@@ -31,8 +31,7 @@ export const TitleContainer = styled.View `
 
 export const Title = styled.Text `
   font-size: 18px;
-  font-weight: bold;
-  color: ${props => props.theme.colors.black};
+  color: ${props => props.theme.colors.darker};
 `;
 
 export const Button1Container = styled.TouchableOpacity `

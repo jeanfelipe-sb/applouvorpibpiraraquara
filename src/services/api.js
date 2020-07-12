@@ -2,8 +2,7 @@ import axios from 'axios'
 import { getUser } from '../utils'
 
 const api = axios.create({
-  // baseURL: 'https://api-jwt-tutorial.herokuapp.com',
-  // baseURL: 'http://10.0.3.2:3000',
+  // baseURL: 'http://127.0.0.1:8000/api',
   baseURL: 'http://louvor.pibpiraquara.com.br/api',
   headers: {
     'Content-Type': 'application/json',
