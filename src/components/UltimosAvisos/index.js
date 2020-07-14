@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
+import Moment from 'react-moment';
 import { 
   Container,
   TextBodyError, 
@@ -17,7 +18,7 @@ import {
   Icon
 } from './styles'
 
-export default function UltimosAvisos() {
+export default function UltimosAvisos(props) {
   const [ultimosAvisos, setUltimosAvisos] = useState(true)
   return (
     <Container>
@@ -31,42 +32,19 @@ export default function UltimosAvisos() {
       </Header>
         {ultimosAvisos ? <> 
           <CardsContainer>
-            <Card>      
-              <TitleCard>29/11/2020</TitleCard> 
+          {props.avisos.map((aviso) =>
+            <Card key={aviso.id}>     
+              <Moment element={TitleCard} format="DD/MM/YYYY">
+                {aviso.created_at}
+              </Moment>    
               <BodyCard>
-                <TextBodyCard numberOfLines={5}>Cancelamento do ensaio do louvor do culto de batismo, no sábado um dia antes do  </TextBodyCard>
+                <TextBodyCard numberOfLines={5}>{aviso.titulo}</TextBodyCard>
               </BodyCard>
               <FootherCard>      
                 <Icon name="arrow-right"/>        
               </FootherCard>
             </Card>
-            <Card>      
-              <TitleCard>29/11/2020</TitleCard> 
-              <BodyCard>
-                <TextBodyCard numberOfLines={5}>Cancelamento do ensaio  </TextBodyCard>
-              </BodyCard>
-              <FootherCard>      
-                <Icon name="arrow-right"/>        
-              </FootherCard>
-            </Card>
-            <Card>      
-              <TitleCard>29/11/2020</TitleCard> 
-              <BodyCard>
-                <TextBodyCard numberOfLines={5}>Cancelamento do ensaio do louvor do culto de batismo, no sábado um dia antes do  </TextBodyCard>
-              </BodyCard>
-              <FootherCard>      
-                <Icon name="arrow-right"/>        
-              </FootherCard>
-            </Card>
-            <Card>      
-              <TitleCard>29/11/2020</TitleCard> 
-              <BodyCard>
-                <TextBodyCard numberOfLines={5}>Cancelamento do ensaio do louvor do culto de batismo, no sábado um dia antes do  </TextBodyCard>
-              </BodyCard>
-              <FootherCard>      
-                <Icon name="arrow-right"/>        
-              </FootherCard>
-            </Card>
+          )}
           </CardsContainer>
         </> : <> 
           <BodyError>

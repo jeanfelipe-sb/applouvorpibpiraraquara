@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import Moment from 'react-moment';
 
 import PanelCollapse from '../../components/PanelCollapse/index';
 import { RefreshControl } from 'react-native';
@@ -157,8 +158,10 @@ export default function Escalas() {
         {loading ? <CardTextDate>Carregando</CardTextDate> : <> 
           {escalas.map((escala) =>
             <Card key={escala.id}>
-              <CardHeader>
-                <CardTextDate>{escala.data}</CardTextDate>
+              <CardHeader>                   
+                <Moment element={CardTextDate} format="DD/MM/YYYY">
+                  {escala.data}
+                </Moment>  
                 <Button1Container>
                   <Button1Text>Detalhes</Button1Text>
                 </Button1Container>
