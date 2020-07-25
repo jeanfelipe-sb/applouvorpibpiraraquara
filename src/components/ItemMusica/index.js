@@ -5,22 +5,24 @@ import {
   Icon,
   Card,
   CardBody,
-  TextBody,
+  CardLeft,
   CardRight,
   CardRightTouch,
-  TextBodyError,
-  ArtistMusic,TitleMusic
+  ArtistMusic,
+  TitleMusic,
 } from './styles'
 
 export default function ItemMusica(props) {
   return (
-    <CardRightTouch>
+    <CardRightTouch onPress={() => props.navigation.navigate('MusicaDetalhes', {musica: props.musica})}>
       <Card>
-        <Icon name="music-tone-alt"/>
-        <CardBody>
-          <TitleMusic numberOfLines={1}>{props.title}</TitleMusic>
-          <ArtistMusic numberOfLines={1}>{props.artist}</ArtistMusic>
-        </CardBody>
+        <CardLeft>
+          <Icon name="music-tone-alt"/>
+          <CardBody>
+            <TitleMusic numberOfLines={1}>{props.title}</TitleMusic>
+            <ArtistMusic numberOfLines={1}>{props.artist}</ArtistMusic>
+          </CardBody>
+        </CardLeft>
         <CardRight>
           <Icon name="arrow-right"/>
         </CardRight>

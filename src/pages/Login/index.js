@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { StatusBar, ActivityIndicator } from 'react-native';
 import AuthContext from '../../contexts/auth';
+import LogoSrc from '../../images/logo-pib-piraquara.png';
 
 import {
   Container,
@@ -11,6 +12,8 @@ import {
   Input,
   Button,
   ButtonText,
+  Logo,
+  LogoContainer
 } from './styles'
 
 export default function Login(props) {
@@ -46,6 +49,9 @@ export default function Login(props) {
     <Container>
       <StatusBar barStyle="light-content" />
 
+      <LogoContainer>
+        <Logo source={LogoSrc}/>
+      </LogoContainer>
       <Title>Bem-vindo</Title>
       <TextInformation>
         Para continuar, precisamos que você informe seu usuário

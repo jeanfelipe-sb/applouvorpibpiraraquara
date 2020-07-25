@@ -26,14 +26,15 @@ export default function UltimosAvisos(props) {
         <TitleContainer>
           <Title>Últimos Avisos</Title>
         </TitleContainer>
-        <Button1Container>
+        <Button1Container onPress={() => props.navigation.navigate('Avisos')}>
           <Button1Text>Ver todas</Button1Text>
         </Button1Container>
       </Header>
         {ultimosAvisos ? <> 
           <CardsContainer>
           {props.avisos.map((aviso) =>
-            <Card key={aviso.id}>     
+            <Card key={aviso.id}
+              onPress={() => props.navigation.navigate('AvisoDetalhes', {aviso: aviso})}>     
               <Moment element={TitleCard} format="DD/MM/YYYY">
                 {aviso.created_at}
               </Moment>    

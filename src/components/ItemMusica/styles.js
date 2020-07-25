@@ -14,14 +14,16 @@ export const Card = styled.View `
   border-radius: 7px; 
 `;
 
-export const CardBody = styled.View ``;
-
-export const TextBodyError = styled.Text `
-  font-size: 18px;
-  color: ${props => props.theme.colors.success};
-`;  
+export const CardBody = styled.View `
+  margin-left: 20px;
+`;
 
 export const CardRight = styled.View `
+  align-items: center;
+  flex-direction: row;
+`;
+
+export const CardLeft = styled.View `
   align-items: center;
   flex-direction: row;
 `;

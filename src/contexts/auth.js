@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext}  from 'react'
 import api from '../services/api';
 import AsyncStorage from '@react-native-community/async-storage';
-import {View, ActivityIndicator} from 'react-native';
+import Loader from './../components/Loader/index';
 import { storeToken } from '../utils';
 
 const AuthContext = createContext({});
@@ -16,24 +16,21 @@ export const AuthProvider = ({children}) => {
       const storagedToken = await AsyncStorage.getItem("@userToken:token");
 
       if (storagedUser && storagedToken) {
-        setUser(storagedUser);
+        setUser(JSON.parse(storagedUser));
       }
       
       setLoading(false);
     }
 
     loadStorageData();
-  });
+  },[]);
 
   async function signIn(credentials){    
     const response = await api.post('/auth/login', credentials);
-    
-    setUser(response.data.access_token);
-    
     api.defaults.headers.Authorization = `Baerer ${response.data.access_token}`;
-
-    await AsyncStorage.setItem("@userToken:user", 'true');
+    await AsyncStorage.setItem("@userToken:user", JSON.stringify(response.data.user));
     storeToken(response.data.access_token);
+    setUser(response.data.user);
   }
 
   async function signOut() {
@@ -43,14 +40,12 @@ export const AuthProvider = ({children}) => {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#665" />
-      </View>
+      <Loader/>
     );
   }
 
   return (    
-    <AuthContext.Provider value={{signed: !!user, signIn, signOut}}>
+    <AuthContext.Provider value={{signed: !!user, signIn, signOut, user}}>
       {children}
     </AuthContext.Provider> 
   );

@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 import { Container, ViewTitle, Title } from './styles'
 
-export default function Menu() {
+export default function Menu({navigation}) {
   const { signOut } = useContext(AuthContext);
   function handleSignOut() {
     signOut();
@@ -13,20 +13,8 @@ export default function Menu() {
     
   return (
     <Container>
-      <ViewTitle>              
+      <ViewTitle onPress={() => navigation.navigate('Avisos')}>              
         <Title>Avisos</Title>
-      </ViewTitle>
-      <ViewTitle>              
-        <Title>Músicas</Title>
-      </ViewTitle>
-      <ViewTitle>              
-        <Title>Escalas</Title>
-      </ViewTitle>
-      <ViewTitle>              
-        <Title>Tema</Title>
-      </ViewTitle>
-      <ViewTitle>              
-        <Title>Minha conta</Title>
       </ViewTitle>
       <ViewTitle onPress={handleSignOut}>              
         <Title>Sair</Title>

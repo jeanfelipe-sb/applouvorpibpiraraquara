@@ -3,10 +3,11 @@ import CardProximaEscala from '../../components/CardProximaEscala/index';
 import UltimosAvisos from '../../components/UltimosAvisos/index';
 import HeaderHome from '../../components/HeaderHome/index';
 import api from '../../services/api';
+import Loader from '../../components/Loader/index';
 
 import { Container, Wrapper, UserNameText } from './styles'
 
-export default function Home() {
+export default function Home({navigation}) {
   const [avisos, setAvisos] = useState(null)
   const [loading, setLoading] = useState(true)
   
@@ -14,7 +15,6 @@ export default function Home() {
     async function loadData() {
       await api.get(`/avisos`)
       .then((response) => {
-        console.log(response.data.data)
         setAvisos(response.data.data)
       });      
       setLoading(false);
@@ -24,11 +24,11 @@ export default function Home() {
 
   return (
     <Wrapper>
-      {loading ? <UserNameText>Carregando</UserNameText> : <>           
+      {loading ? <Loader/> : <>           
         <Container>
           <HeaderHome/>          
-            <UltimosAvisos avisos={avisos}/>
-          <CardProximaEscala/>
+          <UltimosAvisos avisos={avisos} navigation={navigation}/>
+          <CardProximaEscala navigation={navigation}/>
         </Container>
       </>}
     </Wrapper>

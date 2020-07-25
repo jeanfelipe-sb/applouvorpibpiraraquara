@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { Container, Bold, TitleContainer, Title, TextBodyError, Header, Button1Container, Button1Text } from './styles'
 import CardLink from '../CardLink/index';
 
-export default function CardProximaEscala() {
+export default function CardProximaEscala(props) {
   const [proximaEscala, setProximaEscala] = useState(true)
   return (
     <Container>
@@ -11,7 +11,8 @@ export default function CardProximaEscala() {
         <TitleContainer>
           <Title>Sua próxima escala</Title>
         </TitleContainer>
-        <Button1Container>
+        <Button1Container
+          onPress={() => props.navigation.navigate('Escalas')}>
           <Button1Text>Ver todas</Button1Text>
         </Button1Container>
       </Header>

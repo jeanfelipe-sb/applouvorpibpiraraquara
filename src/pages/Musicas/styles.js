@@ -37,8 +37,11 @@ export const InputSearch = styled.TextInput`
 export const Body = styled.View`
   margin-bottom: 10px;
 `;
-ItemBody
+
 export const ItemBody = styled.View`
   margin: 5px 15px;
 `;
 
+export const Footer = styled.View`
+  margin: 5px 15px;
+`;

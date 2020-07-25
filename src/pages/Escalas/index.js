@@ -5,6 +5,7 @@ import PanelCollapse from '../../components/PanelCollapse/index';
 import { RefreshControl } from 'react-native';
 import ItemMusica from '../../components/ItemMusica/index';
 import api from '../../services/api';
+import Loader from '../../components/Loader/index';
 import { 
   Container, 
   Header, 
@@ -22,7 +23,7 @@ import {
   NextPriorMonth
 } from './styles'
 
-export default function Escalas() {
+export default function Escalas({navigation}) {
   const monthToText=(param)=>{
     switch(param) {
       case 1:
@@ -89,7 +90,6 @@ export default function Escalas() {
     setRefreshing(true);
     await api.get(`/escalasmes/`+numberMonth+`-`+year)
     .then((response) => {
-      console.log(response.data.data)
       setEscalas(response.data.data);
       setRefreshing(false);
     });   
@@ -155,14 +155,15 @@ export default function Escalas() {
             </NextPriorMonth>   
           </SelectMonthContent>
         </Header>
-        {loading ? <CardTextDate>Carregando</CardTextDate> : <> 
+        {loading ? <Loader/> : <> 
           {escalas.map((escala) =>
             <Card key={escala.id}>
               <CardHeader>                   
                 <Moment element={CardTextDate} format="DD/MM/YYYY">
                   {escala.data}
                 </Moment>  
-                <Button1Container>
+                <Button1Container 
+                  onPress={() => navigation.navigate('EscalaDetalhes', escala={escala})}>
                   <Button1Text>Detalhes</Button1Text>
                 </Button1Container>
               </CardHeader>
@@ -173,7 +174,11 @@ export default function Escalas() {
               </CardBodyScroll>
                 <PanelCollapse title="Músicas">
                   {escala.musicas.map((musica) =>
-                    <ItemMusica key={musica.id} title={musica.titulo} artist={musica.artista}/>
+                    <ItemMusica key={musica.id} 
+                      title={musica.titulo} 
+                      artist={musica.artista} 
+                      navigation={navigation}
+                      musica={musica}/>
                   )}
                 </PanelCollapse> 
             </Card>

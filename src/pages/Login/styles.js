@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 export const Container = styled.View`
   display: flex;
   flex: 1;
-  background-color: #444a5a;
+  background-color: ${props => props.theme.colors.primary};
   padding: 40px;
   justify-content: center;
   align-items: stretch;
@@ -11,7 +11,7 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
   text-align: center;
-  color: #ffffff;
+  color: ${props => props.theme.colors.white};
   font-size: 24px;
   font-weight: bold;
 `;
@@ -35,7 +35,7 @@ export const Form = styled.View`
 `;
 
 export const Input = styled.TextInput`
-  background-color: #ffffff;
+  background-color: ${props => props.theme.colors.white};
   border-radius: 3px;
   height: 44px;
   padding: 0px 20px;
@@ -43,7 +43,7 @@ export const Input = styled.TextInput`
 `;
 
 export const Button = styled.TouchableOpacity`
-  background-color: #7a91ca;
+  background-color: ${props => props.theme.colors.danger};
   border-radius: 3px;
   height: 44px;
   padding: 0px 20px;
@@ -53,7 +53,15 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const ButtonText = styled.Text`
-  color: #ffffff;
+  color: ${props => props.theme.colors.white};
   font-weight: bold;
   font-size: 14px;
 `;
+
+export const Logo = styled.Image``;
+
+export const LogoContainer = styled.View`  
+  align-items: center;
+  margin-bottom: 50px;
+`;
+
