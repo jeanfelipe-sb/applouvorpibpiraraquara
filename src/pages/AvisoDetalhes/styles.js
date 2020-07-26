@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.ScrollView`
   display: flex;
   flex: 1;
   background-color: #ffffff;

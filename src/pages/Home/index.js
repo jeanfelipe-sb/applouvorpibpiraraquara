@@ -5,18 +5,25 @@ import HeaderHome from '../../components/HeaderHome/index';
 import api from '../../services/api';
 import Loader from '../../components/Loader/index';
 
-import { Container, Wrapper, UserNameText } from './styles'
+import { Container, Wrapper } from './styles'
 
 export default function Home({navigation}) {
   const [avisos, setAvisos] = useState(null)
+  const [proximaEscala, setProximaEscala] = useState(null)
   const [loading, setLoading] = useState(true)
   
   useEffect(() => {    
     async function loadData() {
-      await api.get(`/avisos`)
+      await api.get(`/ultimos-avisos`)
       .then((response) => {
         setAvisos(response.data.data)
       });      
+
+      await api.get(`/escalasproxima`)
+      .then((response) => {
+        setProximaEscala(response.data.data[0])
+      });  
+      
       setLoading(false);
     }
     loadData();
@@ -28,7 +35,7 @@ export default function Home({navigation}) {
         <Container>
           <HeaderHome/>          
           <UltimosAvisos avisos={avisos} navigation={navigation}/>
-          <CardProximaEscala navigation={navigation}/>
+          <CardProximaEscala proximaEscala={proximaEscala} navigation={navigation}/>
         </Container>
       </>}
     </Wrapper>

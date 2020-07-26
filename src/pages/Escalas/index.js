@@ -163,7 +163,7 @@ export default function Escalas({navigation}) {
                   {escala.data}
                 </Moment>  
                 <Button1Container 
-                  onPress={() => navigation.navigate('EscalaDetalhes', escala={escala})}>
+                  onPress={() => navigation.navigate('EscalaDetalhes', {escala: {escala}})}>
                   <Button1Text>Detalhes</Button1Text>
                 </Button1Container>
               </CardHeader>

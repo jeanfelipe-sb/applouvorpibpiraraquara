@@ -9,6 +9,7 @@ import Home from './../pages/Home'
 import Menu from './../pages/Menu'
 import Escalas from './../pages/Escalas'
 import EscalaDetalhes from '../pages/EscalaDetalhes'
+// import ProximaEscala from '../pages/ProximaEscala'
 import Musicas from './../pages/Musicas'
 import MusicaDetalhes from '../pages/MusicaDetalhes'
 import Avisos from './../pages/Avisos'
@@ -33,7 +34,9 @@ function HomeStackScreen() {
    <HomeStack.Navigator >
     <HomeStack.Screen options={{headerShown: false}} name="Home" component={Home} />
     <HomeStack.Screen name="Avisos" component={Avisos} />      
-    <HomeStack.Screen options={{ title: 'Aviso' }} name="AvisoDetalhes" component={AvisoDetalhes} />          
+    <HomeStack.Screen options={{ title: 'Aviso' }} name="AvisoDetalhes" component={AvisoDetalhes} />  
+    <HomeStack.Screen options={{ title: 'Sua Próxima Escala' }} name="ProximaEscala" component={EscalaDetalhes} />  
+    <MusicasStack.Screen options={{ title: '' }} name="MusicaDetalhes" component={MusicaDetalhes} />        
    </HomeStack.Navigator>
   );
 }

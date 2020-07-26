@@ -26,24 +26,30 @@ export default function MusicaDetalhes({ route, navigation }) {
           <BodyCardText size="30px" numberOfLines={1}>{musica.tonalidade}</BodyCardText>
         </BodyCard>
       </Card>
-      <Card onPress={()=>{ Linking.openURL(musica.audio_link) }}> 
-        <Title size="16px" numberOfLines={5}>Acessar Vídeo</Title>
-        <BodyCard>
-          <Icon name="youtube"/> 
-        </BodyCard>
-      </Card>
-      <Card onPress={()=>{ Linking.openURL(musica.audio_link) }}> 
-        <Title size="16px" numberOfLines={5}>Baixar áudio</Title>
-        <BodyCard>
-          <Icon name="download-cloud"/> 
-        </BodyCard>
-      </Card>
-      <Card onPress={()=>{ Linking.openURL(musica.audio_link) }}> 
-        <Title size="16px" numberOfLines={5}>Baixar cifra</Title>
-        <BodyCard>
-          <Icon name="download"/> 
-        </BodyCard>
-      </Card>
+      {musica.video_link ? <> 
+        <Card onPress={()=>{ Linking.openURL(musica.video_link) }}> 
+          <Title size="16px" numberOfLines={5}>Acessar Vídeo</Title>
+          <BodyCard>
+            <Icon name="youtube"/> 
+          </BodyCard>
+        </Card>
+      </> : false}
+      {musica.audio_link ? <> 
+        <Card onPress={()=>{ Linking.openURL(musica.audio_link) }}> 
+          <Title size="16px" numberOfLines={5}>Baixar áudio</Title>
+          <BodyCard>
+            <Icon name="download-cloud"/> 
+          </BodyCard>
+        </Card>
+      </> : false}
+      {musica.cifra_link ? <>
+        <Card onPress={()=>{ Linking.openURL(musica.cifra_link) }}> 
+          <Title size="16px" numberOfLines={5}>Baixar cifra</Title>
+          <BodyCard>
+            <Icon name="download"/> 
+          </BodyCard>
+        </Card> 
+      </> : false}
     </Container>
   );
 }
