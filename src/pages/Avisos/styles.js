@@ -45,3 +45,16 @@ export const CardTouch = styled.TouchableOpacity`
   border-radius: 7px; 
   margin-bottom: 13px;
 `;
+
+export const Button1Container = styled.TouchableOpacity `
+  border-radius: 7px; 
+  border-width: 1px;
+  border-color: ${props => props.theme.colors.danger};
+  padding: 10px;
+  align-items: center;
+`;
+
+export const Button1Text = styled.Text `
+  font-size: 16px;
+  color: ${props => props.theme.colors.danger};
+`;

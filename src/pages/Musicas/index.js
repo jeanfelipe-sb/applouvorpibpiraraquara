@@ -3,7 +3,6 @@ import api from '../../services/api';
 
 import ItemMusica from '../../components/ItemMusica/index';
 import Loader from '../../components/Loader/index';
-import TouchButtonLight from '../../components/TouchButtonLight/index';
 import { 
   Container, 
   Header,
@@ -13,36 +12,44 @@ import {
   TextHeader,
   ContainerSearch,
   InputSearch,
-  Footer
+  Footer,
+  Button1Text,
+  Button1Container
 } from './styles'
 
 export default function Musicas({navigation}) {
-  const [musicas, setMusicas] = useState(null)
-  const [countMusicas, setcountMusicas] = useState(0)
-  const [loading, setLoading] = useState(true)
+  const [musicas, setMusicas] = useState([])
+  const [search, setSearch] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [showLoadMore, setShowLoadMore] = useState(true)
+  const [page, setPage] = useState(2)
+ 
 
-  async function loadData() {
-    await api.get(`/musicas`)
+  const searchApi = () => {
+    api.get(`/musicas/search/search=`+search+`?page=1`)
     .then((response) => {
-      setMusicas(response.data.data)
-      setcountMusicas(response.data.data.length)
+      const dados = response.data;
+      setShowLoadMore(dados.current_page !== dados.last_page)
+      console.log(dados)
     });      
     setLoading(false);
   }
   
-  async function loadMoreData() {
-    await api.get(`/musicas?page=`+1)
+  const loadMoreData = () => {
+    api.get(`/musicas?page=`+page)
     .then((response) => {
-      setMusicas(musicas.concat(response.data.data))
-      setcountMusicas(countMusicas + response.data.data.length)
-      console.log(response)
+      const dados = response.data;
+      setShowLoadMore(dados.current_page !== dados.last_page)
+      setMusicas(musicas.concat(dados.data));
+      setPage(page+1);
     });      
     setLoading(false);
   }
+
+  const onChangeSearch = (text) => {
+    setSearch(text);
+  }
   
-  useEffect(() => {
-    loadData();
-  },[]);
     
   return (   
     <Wrapper>
@@ -52,23 +59,34 @@ export default function Musicas({navigation}) {
           <ContainerSearch>
             <InputSearch 
               placeholder="Pesquisar"
-              returnKeyType="search"/>
+              returnKeyType="search"
+              onChangeText={text => onChangeSearch(text)}
+              onSubmitEditing={() => searchApi()}
+              />
           </ContainerSearch>
         </Header>
-        <Body>
-          {loading ? <Loader/> : <> 
-            {musicas.map((musica) =>
-              <ItemBody key={musica.id}>
-                <ItemMusica navigation={navigation} title={musica.titulo} artist={musica.artista} musica={musica}/>
-              </ItemBody>
-            )}
-          </>}
-        </Body>
-        <Footer>
-          <TouchButtonLight onPress={() => loadMoreData()}>
-              CARREGAR MAIS
-          </TouchButtonLight>
-        </Footer>
+        {loading ? <Loader/> : <> 
+         { 
+            (musicas.length > 0) ? <>
+              <Body>
+                  {musicas.map((musica) =>
+                    <ItemBody key={musica.id}>
+                      <ItemMusica navigation={navigation} title={musica.titulo} artist={musica.artista} musica={musica}/>
+                    </ItemBody>
+                  )}
+              </Body>
+              { showLoadMore ? <>
+                <Footer>            
+                  <Button1Container onPress={() => loadMoreData()}>
+                    <Button1Text>
+                      Carregar Mais
+                    </Button1Text>
+                  </Button1Container>
+                </Footer>
+              </> : false}
+           </> : false
+         }
+        </>}
       </Container>
     </Wrapper>
   );

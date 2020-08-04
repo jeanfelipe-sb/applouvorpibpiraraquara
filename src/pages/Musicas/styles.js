@@ -1,5 +1,4 @@
 import styled from 'styled-components/native'
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 export const Wrapper = styled.SafeAreaView`
   display: flex;
@@ -44,4 +43,18 @@ export const ItemBody = styled.View`
 
 export const Footer = styled.View`
   margin: 5px 15px;
+`;
+
+
+export const Button1Container = styled.TouchableOpacity `
+  border-radius: 7px; 
+  border-width: 1px;
+  border-color: ${props => props.theme.colors.danger};
+  padding: 10px;
+  align-items: center;
+`;
+
+export const Button1Text = styled.Text `
+  font-size: 16px;
+  color: ${props => props.theme.colors.danger};
 `;

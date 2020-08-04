@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import TouchButtonLight from '../../components/TouchButtonLight/index';
 import api from '../../services/api';
 import Loader from '../../components/Loader/index';
 
@@ -12,23 +11,41 @@ import {
   Title,
   CardTouch,
   CardBody,
-  CardRight
+  CardRight,
+  Button1Text,
+  Button1Container
 } from './styles'
 
 export default function Avisos({navigation}) {
   const [avisos, setAvisos] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [showLoadMore, setShowLoadMore] = useState(true)
+  const [page, setPage] = useState(2)
   
   useEffect(() => {    
     async function loadData() {
       await api.get(`/avisos`)
       .then((response) => {
-        setAvisos(response.data.data)
+        const dados = response.data;
+        setShowLoadMore(dados.current_page !== dados.last_page)
+        setAvisos(dados.data)
       });      
       setLoading(false);
     }
     loadData();
   },[]);
+
+  const loadMoreData = () => {
+    api.get(`/musicas?page=`+page)
+    .then((response) => {
+      const dados = response.data;
+      setShowLoadMore(dados.current_page !== dados.last_page)
+
+      setMusicas(musicas.concat(dados.data));
+      setPage(page+1);
+    });      
+    setLoading(false);
+  }
 
   return (
     <Wrapper>
@@ -46,7 +63,13 @@ export default function Avisos({navigation}) {
               </CardRight>
             </CardTouch> 
           )}
-          <TouchButtonLight>CARREGAR MAIS</TouchButtonLight>
+          { showLoadMore ? <>
+            <Button1Container onPress={() => loadMoreData()}>
+              <Button1Text>
+                Carregar Mais
+              </Button1Text>
+            </Button1Container>
+          </> : false}
         </Container>
       </>}
     </Wrapper>
