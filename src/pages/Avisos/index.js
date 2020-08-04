@@ -36,7 +36,7 @@ export default function Avisos({navigation}) {
   },[]);
 
   const loadMoreData = () => {
-    api.get(`/musicas?page=`+page)
+    api.get(`/avisos?page=`+page)
     .then((response) => {
       const dados = response.data;
       setShowLoadMore(dados.current_page !== dados.last_page)

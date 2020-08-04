@@ -26,6 +26,7 @@ export const CardRight = styled.View `
 export const CardLeft = styled.View `
   align-items: center;
   flex-direction: row;
+  width: 80%;
 `;
 
 export const CardRightTouch = styled.TouchableOpacity``;

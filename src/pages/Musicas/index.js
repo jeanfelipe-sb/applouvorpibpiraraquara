@@ -20,6 +20,7 @@ import {
 export default function Musicas({navigation}) {
   const [musicas, setMusicas] = useState([])
   const [search, setSearch] = useState('')
+  const [lastSearch, setLastSearch] = useState('')
   const [loading, setLoading] = useState(false)
   const [showLoadMore, setShowLoadMore] = useState(true)
   const [page, setPage] = useState(2)
@@ -29,14 +30,15 @@ export default function Musicas({navigation}) {
     api.get(`/musicas/search/search=`+search+`?page=1`)
     .then((response) => {
       const dados = response.data;
+      setMusicas(dados.data);
+      setLastSearch(search);
       setShowLoadMore(dados.current_page !== dados.last_page)
-      console.log(dados)
     });      
     setLoading(false);
   }
   
   const loadMoreData = () => {
-    api.get(`/musicas?page=`+page)
+    api.get(`/musicas/search/search=`+lastSearch+`?page=`+page)
     .then((response) => {
       const dados = response.data;
       setShowLoadMore(dados.current_page !== dados.last_page)
@@ -44,12 +46,7 @@ export default function Musicas({navigation}) {
       setPage(page+1);
     });      
     setLoading(false);
-  }
-
-  const onChangeSearch = (text) => {
-    setSearch(text);
-  }
-  
+  }  
     
   return (   
     <Wrapper>
@@ -60,8 +57,8 @@ export default function Musicas({navigation}) {
             <InputSearch 
               placeholder="Pesquisar"
               returnKeyType="search"
-              onChangeText={text => onChangeSearch(text)}
-              onSubmitEditing={() => searchApi()}
+              onChangeText={text => setSearch(text)}
+              onSubmitEditing={(text) => searchApi()}
               />
           </ContainerSearch>
         </Header>
