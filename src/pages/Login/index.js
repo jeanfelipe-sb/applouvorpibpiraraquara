@@ -26,8 +26,8 @@ export default function Login(props) {
   async function handleSignIn() {
     try {
       const credentials = {
-        email: 'jiam16@yahoo.com.br',//username,
-        password: 'Jfsb1234'//password
+        email: username,
+        password: password
       }
       
       setLoadingLogin(true)
