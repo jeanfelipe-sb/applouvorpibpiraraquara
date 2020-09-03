@@ -35,11 +35,17 @@ export async function getToken() {
 
 // NavigationService
 
-// export function navigate(routeName, params) {
-//   navigator.dispatch(
-//     CommonActions.navigate({
-//       routeName,
-//       params,
-//     }),
-//   );
-// }
+let navigator;
+
+export function setTopLevelNavigator(navigatorRef) {
+  navigator = navigatorRef;
+}
+
+export function navigate(routeName, params) {
+  navigator.dispatch(
+    CommonActions.navigate({      
+      name: routeName,
+      params,
+    })
+  );
+}

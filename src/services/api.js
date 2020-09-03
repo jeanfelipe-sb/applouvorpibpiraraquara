@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getUser } from '../utils'
+import { getUser, navigate, deleteUser } from '../utils'
 
 const api = axios.create({
   // baseURL: 'http://127.0.0.1:8000/api',
@@ -8,50 +8,61 @@ const api = axios.create({
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
-})
+});
 
-// api.interceptors.response.use(
-//   response => {
 
-//     // Do something with response data
+// api.interceptors.response.use(undefined, err => {
+//   const error = err.response;
+//   console.log(error);
+//   if(error !== undefined){
+//     if (error.status===401) {
+//       //AsyncStorage.clear();
+//     } 
+//   }
+// });
 
-//     return response
-//   },
-//   error => {
+api.interceptors.response.use(
+  response => {
 
-//     // Do something with response error
+    // Do something with response data
 
-//     // You can even test for a response code
-//     // and try a new request before rejecting the promise
+    return response
+  },
+  error => {
 
-//     if (
-//       error.request._hasError === true &&
-//       error.request._response.includes('connect')
-//     ) {
-//       Alert.alert(
-//         'Aviso',
-//         'Não foi possível conectar aos nossos servidores, sem conexão a internet',
-//         [ { text: 'OK' } ],
-//         { cancelable: false },
-//       )
-//     }
+    // Do something with response error
 
-//     if (error.response.status === 401) {
-//       const requestConfig = error.config
+    // You can even test for a response code
+    // and try a new request before rejecting the promise
 
-//       // O token JWT expirou
+    if (
+      error.request._hasError === true &&
+      error.request._response.includes('connect')
+    ) {
+      Alert.alert(
+        'Aviso',
+        'Não foi possível conectar aos nossos servidores, sem conexão a internet',
+        [ { text: 'OK' } ],
+        { cancelable: false },
+      )
+    }
 
-//       deleteUser()
-//         .then(() => {
-//           navigate('AuthLoading', {})
-//         })
+    if (error.response.status === 401) {
+      const requestConfig = error.config
 
-//       return axios(requestConfig)
-//     }
+      // O token JWT expirou
 
-//     return Promise.reject(error)
-//   },
-// )
+      deleteUser()
+        .then(() => {
+          navigate('Logout',{})          
+        })
+
+      return axios(requestConfig)
+    }
+
+    return Promise.reject(error)
+  },
+)
 
 api.interceptors.request.use(
   config => {

@@ -14,6 +14,7 @@ import Musicas from './../pages/Musicas'
 import MusicaDetalhes from '../pages/MusicaDetalhes'
 import Avisos from './../pages/Avisos'
 import AvisoDetalhes from '../pages/AvisoDetalhes'
+import Logout from '../pages/Logout'
 
 const EscalasStack = createStackNavigator();
 
@@ -22,7 +23,8 @@ function EscalasStackScreen() {
    <EscalasStack.Navigator >
     <EscalasStack.Screen options={{headerShown: false}} name="Escalas" component={Escalas} />             
     <EscalasStack.Screen options={{ title: 'Detalhes da Escala' }} name="EscalaDetalhes" component={EscalaDetalhes} />
-    <MusicasStack.Screen options={{ title: '' }} name="MusicaDetalhes" component={MusicaDetalhes} />
+    <EscalasStack.Screen options={{ title: '' }} name="MusicaDetalhes" component={MusicaDetalhes} />
+    <EscalasStack.Screen options={{headerShown: false}} name="Logout" component={Logout} />
    </EscalasStack.Navigator>
   );
 }
@@ -35,8 +37,8 @@ function HomeStackScreen() {
     <HomeStack.Screen options={{headerShown: false}} name="Home" component={Home} />
     <HomeStack.Screen name="Avisos" component={Avisos} />      
     <HomeStack.Screen options={{ title: 'Aviso' }} name="AvisoDetalhes" component={AvisoDetalhes} />  
-    <HomeStack.Screen options={{ title: 'Sua Próxima Escala' }} name="ProximaEscala" component={EscalaDetalhes} />  
-    <MusicasStack.Screen options={{ title: '' }} name="MusicaDetalhes" component={MusicaDetalhes} />        
+    <HomeStack.Screen options={{ title: 'Sua Próxima Escala' }} name="ProximaEscala" component={EscalaDetalhes} /> 
+    <HomeStack.Screen options={{headerShown: false}} name="Logout" component={Logout} />      
    </HomeStack.Navigator>
   );
 }
@@ -47,7 +49,8 @@ function MusicasStackScreen() {
  return (
    <MusicasStack.Navigator >
     <MusicasStack.Screen options={{headerShown: false}} name="Musicas" component={Musicas} />             
-    <MusicasStack.Screen options={{ title: '' }} name="MusicaDetalhes" component={MusicaDetalhes} />
+    <MusicasStack.Screen options={{ title: '' }} name="MusicaDetalhes" component={MusicaDetalhes} /> 
+    <MusicasStack.Screen options={{headerShown: false}} name="Logout" component={Logout} />      
    </MusicasStack.Navigator>
   );
 }
@@ -59,7 +62,8 @@ function MenuStackScreen() {
    <MenuStack.Navigator >
     <MenuStack.Screen options={{headerShown: false}} name="Menu" component={Menu} />
     <MenuStack.Screen name="Avisos" component={Avisos} />             
-    <MenuStack.Screen options={{ title: 'Aviso' }} name="AvisoDetalhes" component={AvisoDetalhes} />             
+    <MenuStack.Screen options={{ title: 'Aviso' }} name="AvisoDetalhes" component={AvisoDetalhes} />   
+    <MenuStack.Screen options={{headerShown: false}} name="Logout" component={Logout} />                
    </MenuStack.Navigator>
   );
 }
