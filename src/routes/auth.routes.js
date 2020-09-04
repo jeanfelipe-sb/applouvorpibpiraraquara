@@ -13,7 +13,7 @@ function AuthRoutes() {
       headerShown: false
     }}>
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen ooptions={{headerShown: false}} name="Logout" component={Logout} />
+      <Stack.Screen options={{headerShown: false}} name="Logout" component={Logout} />
     </Stack.Navigator>
   );
 }

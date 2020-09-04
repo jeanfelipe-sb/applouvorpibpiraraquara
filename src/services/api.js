@@ -46,15 +46,20 @@ api.interceptors.response.use(
         { cancelable: false },
       )
     }
-
+   
     if (error.response.status === 401) {
       const requestConfig = error.config
 
-      // O token JWT expirou
+      // O token JWT expirou 
 
-      deleteUser()
-        .then(() => {
-          navigate('Logout',{})          
+        getUser()
+        .then(token => {
+          console.log(token)
+          if (token !== null) //( e não está na tela de login)
+            deleteUser()
+            .then(() => {
+              navigate('Logout',{})          
+            })
         })
 
       return axios(requestConfig)
